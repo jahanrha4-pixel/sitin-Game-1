@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SITIN — Build Your Nation</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇸🇮</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== NEW GAME / LOAD SCREEN ===== -->
+<div id="bootScreen" class="boot-screen">
+  <div class="boot-card glass">
+    <div class="boot-emblem">🇸🇮</div>
+    <h1 class="boot-title">SITIN</h1>
+    <p class="boot-sub">BUILD YOUR NATION</p>
+    <div class="boot-actions">
+      <button id="btnContinue" class="btn btn-gold" style="display:none">ادامه بازی</button>
+      <button id="btnNewGame" class="btn btn-outline">شروع بازی جدید</button>
+      <label class="btn btn-outline file-btn">
+        بارگذاری فایل ذخیره
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </label>
+    </div>
+    <p class="boot-note">پیشرفت شما به‌صورت خودکار در همین مرورگر (localStorage) ذخیره می‌شود.</p>
+  </div>
+</div>
+
+<!-- ===== APP SHELL ===== -->
+<div id="app" class="app hidden">
+
+  <!-- Topbar -->
+  <header class="topbar glass">
+    <div class="topbar-brand">
+      <span class="brand-emblem">🇸🇮</span>
+      <span class="brand-name">SITIN</span>
+    </div>
+    <div class="topbar-stats" id="topbarStats"></div>
+    <div class="topbar-actions">
+      <button id="btnEndTurn" class="btn btn-gold btn-sm">⏱️ پایان نوبت</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar (desktop) -->
+    <nav class="sidebar glass" id="sidebar">
+      <button class="nav-item active" data-view="dashboard"><span>🏠</span><em>Dashboard</em></button>
+      <button class="nav-item" data-view="worldmap"><span>🗺️</span><em>World Map</em></button>
+      <button class="nav-item" data-view="economy"><span>💰</span><em>Economy</em></button>
+      <button class="nav-item" data-view="industry"><span>🏭</span><em>Industry</em></button>
+      <button class="nav-item" data-view="defense"><span>🛡️</span><em>Defense</em></button>
+      <button class="nav-item" data-view="equipment"><span>🛒</span><em>Equipment</em></button>
+      <button class="nav-item" data-view="diplomacy"><span>🤝</span><em>Diplomacy</em></button>
+      <button class="nav-item" data-view="news"><span>📰</span><em>News</em></button>
+      <button class="nav-item" data-view="statistics"><span>📊</span><em>Statistics</em></button>
+      <button class="nav-item" data-view="save"><span>💾</span><em>Save / Load</em></button>
+      <button class="nav-item" data-view="settings"><span>⚙️</span><em>Settings</em></button>
+    </nav>
+
+    <!-- Main content -->
+    <main class="content" id="content">
+      <section id="view-dashboard" class="view"></section>
+      <section id="view-worldmap" class="view"></section>
+      <section id="view-economy" class="view"></section>
+      <section id="view-industry" class="view"></section>
+      <section id="view-defense" class="view"></section>
+      <section id="view-equipment" class="view"></section>
+      <section id="view-diplomacy" class="view"></section>
+      <section id="view-news" class="view"></section>
+      <section id="view-statistics" class="view"></section>
+      <section id="view-save" class="view"></section>
+      <section id="view-settings" class="view"></section>
+    </main>
+  </div>
+
+  <!-- Bottom nav (mobile) — scrollable, includes every view -->
+  <nav class="bottomnav glass" id="bottomnav">
+    <button class="nav-item active" data-view="dashboard"><span>🏠</span></button>
+    <button class="nav-item" data-view="worldmap"><span>🗺️</span></button>
+    <button class="nav-item" data-view="economy"><span>💰</span></button>
+    <button class="nav-item" data-view="industry"><span>🏭</span></button>
+    <button class="nav-item" data-view="defense"><span>🛡️</span></button>
+    <button class="nav-item" data-view="equipment"><span>🛒</span></button>
+    <button class="nav-item" data-view="diplomacy"><span>🤝</span></button>
+    <button class="nav-item" data-view="news"><span>📰</span></button>
+    <button class="nav-item" data-view="statistics"><span>📊</span></button>
+    <button class="nav-item" data-view="save"><span>💾</span></button>
+    <button class="nav-item" data-view="settings"><span>⚙️</span></button>
+  </nav>
+
+  <!-- Notification stack -->
+  <div id="notifyStack" class="notify-stack"></div>
+
+  <!-- Modal root -->
+  <div id="modalRoot"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/systems.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
